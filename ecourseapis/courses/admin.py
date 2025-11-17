@@ -1,8 +1,9 @@
 from django.contrib import admin
+from django.template.response import TemplateResponse
 from django.utils.safestring import mark_safe
-
+from django.db.models import Count
 from courses.models import Category, Course, Lesson
-
+from django.urls import path
 from django import forms
 from ckeditor_uploader.widgets \
     import CKEditorUploadingWidget
@@ -27,7 +28,18 @@ class CourseAdmin(admin.ModelAdmin):
         }
 class LessonAdmin(admin.ModelAdmin):
     form=LessonForm
+class MyAdminSite(admin.AdminSite):
+    site_header = 'Ecourse Online'
+    site_title = 'Ecourse Admin Portal'
+    index_title = 'Welcome to Ecourse Admin Portal'
+    def get_urls(self):
+        return [path('course-stats/', self.stats_view)] + super().get_urls()
+    def stats_view(self, request):
+        stats = Category.objects.annotate(count=Count('course')).values('id','name','count')
+        return TemplateResponse(request, 'admin/stats.html',{'stats':stats})
 
-admin.site.register(Category)
-admin.site.register(Course, CourseAdmin)
-admin.site.register(Lesson, LessonAdmin)
+admin_site = MyAdminSite(name='ecourseadmin')
+
+admin_site.register(Category)
+admin_site.register(Course, CourseAdmin)
+admin_site.register(Lesson, LessonAdmin)
