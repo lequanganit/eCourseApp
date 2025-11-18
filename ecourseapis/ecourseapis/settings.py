@@ -41,8 +41,9 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'rest_framework',
-
     'drf_yasg',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 CKEDITOR_UPLOAD_PATH = "images/ckeditors/"
 MIDDLEWARE = [
@@ -54,7 +55,14 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+cloudinary.config(
+  	cloud_name = "durpn2bki",
+  	api_key = "618347915231647",
+  	api_secret = "yBdqjB1JHz0jpnwFaIQhE8wZmjE"
+)
 ROOT_URLCONF = 'ecourseapis.urls'
 
 TEMPLATES = [
