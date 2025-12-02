@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.template.response import TemplateResponse
 from django.utils.safestring import mark_safe
 from django.db.models import Count
-from courses.models import Category, Course, Lesson
+from courses.models import Category, Course, Lesson, Tag, Comment, Like
 from django.urls import path
 from django import forms
 from ckeditor_uploader.widgets \
@@ -41,5 +41,9 @@ class MyAdminSite(admin.AdminSite):
 admin_site = MyAdminSite(name='ecourseadmin')
 
 admin_site.register(Category)
+admin_site.register(Tag)
+admin_site.register(Comment)
+admin_site.register(Like)
+
 admin_site.register(Course, CourseAdmin)
 admin_site.register(Lesson, LessonAdmin)

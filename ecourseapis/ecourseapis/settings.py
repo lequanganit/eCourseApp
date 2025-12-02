@@ -44,7 +44,15 @@ INSTALLED_APPS = [
     'drf_yasg',
     'cloudinary',
     'cloudinary_storage',
+    'oauth2_provider',
+
 ]
+REST_FRAMEWORK = {
+ 'DEFAULT_AUTHENTICATION_CLASSES': (
+ 'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+ )
+ }
+
 CKEDITOR_UPLOAD_PATH = "images/ckeditors/"
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

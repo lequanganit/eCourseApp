@@ -43,6 +43,9 @@ urlpatterns = [
     name = 'schema-swagger-ui'),
     re_path(r'^redoc/$',
         schema_view.with_ui('redoc', cache_timeout=0),
-        name='schema-redoc')
+        name='schema-redoc'),
+    path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
 
 ]
+# CLIENT_ID='HZCZQmwIdXhJHytEWsQASzHBygkFAjOfXactv1Te'
+# CLIENT_SECRET='pdhGd2ORitrt2lf26f3RrYHIookV6USEfHJ2779fVFjRBld3HNyjMdjzfRim2yO9dBy7KqE6jTJFu8AOhbMOEpBCrYJPraFlmAmuZWzy19Qat1KjX4ju841Spj3lGqHz'
